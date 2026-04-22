@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milam — Drive 5 Years. Walk Away Richer.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #c8a96e;
+  --gold-light: #e8c97e;
+  --red: #e05252;
+  --bg: #111;
+  --bg2: #161616;
+  --bg3: #0d0d0d;
+  --border: #2a2a2a;
+  --text: #f0ece4;
+  --text-dim: #aaa;
+  --text-muted: #666;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(17,17,17,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 4px;
+  color: var(--gold);
+}
+
+.nav-cta {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 8px 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.nav-cta:hover { background: var(--gold); color: #000; }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(200,169,110,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 14vw, 80px);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+
+.hero-headline em { color: var(--gold); font-style: normal; }
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--text-dim);
+  max-width: 320px;
+  font-weight: 300;
+  margin-bottom: 36px;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+}
+
+.hero-btn {
+  display: inline-block;
+  background: var(--gold);
+  color: #000;
+  padding: 14px 32px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+
+.hero-btn:hover { background: var(--gold-light); }
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  animation: fadeUp 0.8s 1s forwards;
+  justify-content: center;
+}
+
+.stat-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 72px 20px;
+}
+
+.section-eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.section-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 10vw, 52px);
+  line-height: 1.0;
+  letter-spacing: 1px;
+  margin-bottom: 36px;
+}
+
+.section-headline em { color: var(--gold); font-style: normal; }
+
+hr.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0 20px;
+}
+
+/* ── COMPARISON CARDS ── */
+.comparison-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comp-card {
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  overflow: hidden;
+}
+
+.comp-card.milam-card {
+  border-color: rgba(200,169,110,0.5);
+  border-top: 3px solid var(--gold);
+  background: rgba(200,169,110,0.03);
+}
+
+.comp-card-header {
+  padding: 16px 20px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.milam-card .comp-card-header {
+  color: var(--gold);
+  border-bottom-color: rgba(200,169,110,0.15);
+}
+
+.comp-tag {
+  font-size: 9px;
+  padding: 3px 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.comp-tag.best {
+  background: rgba(200,169,110,0.15);
+  color: var(--gold);
+  border: 1px solid rgba(200,169,110,0.3);
+}
+
+.comp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #1a1a1a;
+  gap: 16px;
+}
+
+.comp-row:last-child { border-bottom: none; }
+
+.comp-row-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #555;
+  flex-shrink: 0;
+  min-width: 90px;
+}
+
+.comp-row-val {
+  font-size: 14px;
+  text-align: right;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.comp-row-val.red { color: var(--red); }
+.comp-row-val.dim { color: #555; }
+.comp-row-val.gold { color: var(--gold); }
+.comp-row-val.bright { color: var(--gold-light); }
+
+.comp-badge {
+  display: inline-block;
+  font-size: 9px;
+  padding: 2px 7px;
+  margin-top: 3px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.comp-badge.bad {
+  background: rgba(224,82,82,0.1);
+  color: var(--red);
+  border: 1px solid rgba(224,82,82,0.2);
+}
+
+.comp-badge.good {
+  background: rgba(200,169,110,0.12);
+  color: var(--gold);
+  border: 1px solid rgba(200,169,110,0.25);
+}
+
+.comp-callout {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  background: var(--bg3);
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+
+.comp-callout strong { color: var(--gold); }
+
+/* ── WHY MILAM ── */
+.why-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.why-line {
+  display: flex;
+  gap: 14px;
+  padding: 18px 16px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  align-items: flex-start;
+}
+
+.why-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.why-dot.bad { background: var(--red); }
+.why-dot.good { background: var(--gold); }
+
+.why-line-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.why-line-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.why-line-text.good { color: var(--gold); }
+.why-line-text strong { color: var(--red); }
+.why-line-text.good strong { color: var(--gold-light); }
+
+.outcome-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.outcome-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 20px;
+  position: relative;
+}
+
+.outcome-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--border);
+}
+
+.outcome-card.milam::before {
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+
+.outcome-card-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 14px;
+}
+
+.outcome-card.milam .outcome-card-label { color: var(--gold); }
+
+.outcome-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.outcome-row:last-child { border-bottom: none; }
+.outcome-key { font-size: 12px; color: #555; }
+
+.outcome-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+.outcome-val.red { color: var(--red); }
+.outcome-val.dim { color: #444; }
+.outcome-val.gold { color: var(--gold); }
+.outcome-val.bright { color: var(--gold-light); }
+
+.vs {
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: #333;
+  padding: 4px 0;
+}
+
+/* ── CALCULATOR ── */
+#calculator {
+  background: var(--bg2);
+  border-top: 3px solid var(--gold);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 20px;
+}
+
+.calc-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.calc-input {
+  width: 100%;
+  background: #0d0d0d;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  outline: none;
+  margin-bottom: 24px;
+  transition: border-color 0.2s;
+}
+
+.calc-input:focus { border-color: var(--gold); }
+
+.term-btns {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.term-btn {
+  flex: 1;
+  padding: 12px 8px;
+  background: #0d0d0d;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.term-btn.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(200,169,110,0.05);
+}
+
+.calc-results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.result-card {
+  background: #0d0d0d;
+  border: 1px solid var(--border);
+  padding: 20px;
+}
+
+.result-card.primary {
+  border-color: rgba(200,169,110,0.4);
+  background: rgba(200,169,110,0.03);
+}
+
+.result-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.result-card.primary .result-label { color: var(--gold); }
+
+.result-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.result-card.primary .result-val { color: var(--gold); }
+
+.result-note {
+  font-size: 11px;
+  color: #555;
+  margin-top: 6px;
+}
+
+.calc-disclaimer {
+  font-size: 11px;
+  color: #555;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* ── DELETE DEPRECIATION ── */
+.feature-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.feature-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 24px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.feature-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--gold);
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.feature-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.feature-text {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.footer-text {
+  font-size: 11px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* ── DESKTOP UPGRADES ── */
+@media (min-width: 768px) {
+  nav { padding: 20px 48px; }
+  .nav-logo { font-size: 22px; }
+  #hero { padding: 120px 48px 80px; }
+  .hero-headline { font-size: clamp(72px, 10vw, 120px); }
+  .hero-glow { width: 600px; height: 600px; }
+  .hero-stats { gap: 60px; }
+  .stat-val { font-size: 40px; }
+  .section { padding: 100px 48px; max-width: 1000px; margin: 0 auto; }
+  hr.divider { margin: 0 48px; }
+  #calculator { padding: 80px 48px; }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .feature-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .feature-card { background: var(--bg2); }
+  footer { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px; }
+  .footer-logo { margin-bottom: 0; }
+
+  /* Desktop comparison — show as proper table */
+  .comparison-cards { display: none; }
+  .comparison-table { display: block; }
+}
+
+/* Hide desktop table on mobile */
+.comparison-table { display: none; }
+
+/* ── DESKTOP TABLE ── */
+.table-wrap {
+  width: 100%;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
+  background: var(--bg2);
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.th {
+  padding: 18px 20px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #555;
+}
+
+.th.milam {
+  color: var(--gold);
+  background: rgba(200,169,110,0.04);
+  border-left: 1px solid rgba(200,169,110,0.15);
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
+  border-bottom: 1px solid #181818;
+}
+
+.table-row:last-child { border-bottom: none; }
+
+.td {
+  padding: 24px 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+  border-right: 1px solid #181818;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.5;
+}
+
+.td:last-child { border-right: none; }
+
+.td.label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #444;
+}
+
+.td.milam {
+  background: rgba(200,169,110,0.03);
+  border-left: 1px solid rgba(200,169,110,0.12);
+}
+
+.val-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.val-big.red { color: var(--red); }
+.val-big.dim { color: #444; }
+.val-big.gold { color: var(--gold); }
+.val-sub { font-size: 11px; color: #555; }
+
+.neg { color: #aaa; font-size: 13px; line-height: 1.5; }
+.neg strong { color: var(--red); display: block; font-size: 14px; margin-bottom: 2px; }
+.pos { color: var(--gold); font-size: 13px; line-height: 1.5; }
+.pos strong { color: var(--gold-light); display: block; font-size: 14px; margin-bottom: 2px; }
+.neu { color: #888; font-size: 13px; line-height: 1.5; }
+.neu strong { color: #bbb; display: block; font-size: 14px; margin-bottom: 2px; }
+
+.badge-bad {
+  display: inline-block;
+  background: rgba(224,82,82,0.08);
+  color: var(--red);
+  border: 1px solid rgba(224,82,82,0.2);
+  padding: 3px 8px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.badge-good {
+  display: inline-block;
+  background: rgba(200,169,110,0.08);
+  color: var(--gold);
+  border: 1px solid rgba(200,169,110,0.2);
+  padding: 3px 8px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MILAM</div>
+  <a href="#start" class="nav-cta">Join Waitlist</a>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <p class="hero-eyebrow">Car Finance. Reimagined.</p>
+  <h1 class="hero-headline">Drive 5 Years.<br><em>Walk Away Richer.</em></h1>
+  <p class="hero-sub">The only car finance that pays you back. Keep it for $6,000 — or walk away with cash. You decide.</p>
+  <a href="#comparison" class="hero-btn">See How It Works ↓</a>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-val">$6K</div>
+      <div class="stat-label">To keep</div>
+    </div>
+    <div>
+      <div class="stat-val">$0</div>
+      <div class="stat-label">GFV gives back</div>
+    </div>
+    <div>
+      <div class="stat-val">5 YR</div>
+      <div class="stat-label">Fixed term</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- COMPARISON -->
+<div class="section" id="comparison">
+  <p class="section-eyebrow">The Milam Difference</p>
+  <h2 class="section-headline">Same Car.<br><em>Different Outcome.</em></h2>
+
+  <!-- MOBILE CARDS -->
+  <div class="comparison-cards">
+
+    <div class="comp-card">
+      <div class="comp-card-header">Traditional GFV</div>
+      <div class="comp-row">
+        <div class="comp-row-label">Weekly</div>
+        <div class="comp-row-val dim">$197/week</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-row-label">Return car</div>
+        <div class="comp-row-val red">Get $0 back<br><span class="comp-badge bad">Nothing</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-row-label">Keep car</div>
+        <div class="comp-row-val red">Pay $22,000<br><span class="comp-badge bad">$22k balloon</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-row-label">End of term</div>
+        <div class="comp-row-val red">Pay $22k or walk away with nothing</div>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-card-header">Standard Loan</div>
+      <div class="comp-row">
+        <div class="comp-row-label">Weekly</div>
+        <div class="comp-row-val red">$269/week — most expensive</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-row-label">Return car</div>
+        <div class="comp-row-val dim">Sell it yourself — no guarantee</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-row-label">Keep car</div>
+        <div class="comp-row-val dim">Already own it — but depreciating</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-row-label">End of term</div>
+        <div class="comp-row-val dim">Warranty gone. Repair costs begin.</div>
+      </div>
+    </div>
+
+    <div class="comp-card milam-card">
+      <div class="comp-card-header">Milam <span class="comp-tag best">✦ Best outcome</span></div>
+      <div class="comp-row">
+        <div class="comp-row-label">Weekly</div>
+        <div class="comp-row-val gold">$253/week — $16 less than standard</div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-row-label">Return car</div>
+        <div class="comp-row-val bright">Get cash back<br><span class="comp-badge good">Paid in full</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-row-label">Keep car</div>
+        <div class="comp-row-val bright">Pay $6,000 only<br><span class="comp-badge good">$16k cheaper than GFV</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="comp-row-label">End of term</div>
+        <div class="comp-row-val bright">Pay $6k to keep — or get cash. You choose.</div>
+      </div>
+    </div>
+
+    <div class="comp-callout">
+      Every other product leaves you with <strong>a bill or nothing.</strong> Milam gives you a real choice — keep it for $6,000 or <strong>walk away with cash.</strong> No dead ends.
+    </div>
+
+  </div>
+
+  <!-- DESKTOP TABLE -->
+  <div class="comparison-table">
+    <div class="table-wrap">
+      <div class="table-header">
+        <div class="th">The Setup</div>
+        <div class="th">Traditional GFV</div>
+        <div class="th">Standard Loan</div>
+        <div class="th milam">Milam</div>
+      </div>
+      <div class="table-row">
+        <div class="td label">Weekly Cost</div>
+        <div class="td"><div class="val-big dim">$197</div><div class="val-sub">Lowest weekly</div></div>
+        <div class="td"><div class="val-big red">$269</div><div class="val-sub">Highest weekly</div></div>
+        <div class="td milam"><div class="val-big gold">$253</div><div class="val-sub">$16 less than standard</div></div>
+      </div>
+      <div class="table-row">
+        <div class="td label">Return Car</div>
+        <div class="td"><div class="neg"><strong>Get $0 back</strong>Walk away with nothing</div><span class="badge-bad">Zero return</span></div>
+        <div class="td"><div class="neu"><strong>Sell yourself</strong>No guarantee on price</div></div>
+        <div class="td milam"><div class="pos"><strong>Get cash back</strong>We pay you at the end</div><span class="badge-good">Cash in hand</span></div>
+      </div>
+      <div class="table-row">
+        <div class="td label">Keep Car</div>
+        <div class="td"><div class="neg"><strong>Pay $22,000</strong>For a 5 year old car</div><span class="badge-bad">$22k balloon</span></div>
+        <div class="td"><div class="neu"><strong>Already own it</strong>Worth half what you paid</div></div>
+        <div class="td milam"><div class="pos"><strong>Pay $6,000</strong>$16,000 cheaper than GFV</div><span class="badge-good">$16k cheaper</span></div>
+      </div>
+      <div class="table-row">
+        <div class="td label">End of Term</div>
+        <div class="td"><div class="neg"><strong>Dead end</strong>Pay $22k or get nothing</div></div>
+        <div class="td"><div class="neu"><strong>Depreciating asset</strong>Warranty gone. Repairs start.</div></div>
+        <div class="td milam"><div class="pos"><strong>Your decision</strong>Pay $6k to keep — or get cash</div><span class="badge-good">You're in control</span></div>
+      </div>
+    </div>
+    <div class="comp-callout" style="margin-top:20px">
+      Every other product leaves you with <strong>a bill or nothing.</strong> Milam gives you a real choice — keep it for $6,000 or <strong>walk away with cash.</strong> No dead ends.
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- WHY MILAM -->
+<div class="section">
+  <p class="section-eyebrow">Why Milam Exists</p>
+  <h2 class="section-headline">Every other product<br>leaves you with<br><em>a bill or nothing.</em></h2>
+
+  <div class="why-lines">
+    <div class="why-line">
+      <div class="why-dot bad"></div>
+      <div>
+        <div class="why-line-label">Traditional GFV</div>
+        <div class="why-line-text">Return the car. Get <strong>$0 back.</strong> Or pay $22,000 for a 5 year old car. No middle ground.</div>
+      </div>
+    </div>
+    <div class="why-line">
+      <div class="why-dot bad"></div>
+      <div>
+        <div class="why-line-label">Standard Loan</div>
+        <div class="why-line-text">You own it — but it's lost half its value. Warranty gone. <strong>Repairs begin.</strong> You absorb all the loss.</div>
+      </div>
+    </div>
+    <div class="why-line">
+      <div class="why-dot good"></div>
+      <div>
+        <div class="why-line-label">Milam</div>
+        <div class="why-line-text good">Return it — <strong>get paid cash.</strong> Or keep it for $6,000. Always your call.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="outcome-cards">
+    <div class="outcome-card">
+      <div class="outcome-card-label">Traditional GFV — End of Term</div>
+      <div class="outcome-row">
+        <div class="outcome-key">Return car</div>
+        <div class="outcome-val red">$0 back</div>
+      </div>
+      <div class="outcome-row">
+        <div class="outcome-key">Keep car</div>
+        <div class="outcome-val red">Pay $22,000</div>
+      </div>
+      <div class="outcome-row">
+        <div class="outcome-key">Your options</div>
+        <div class="outcome-val dim">2 bad ones</div>
+      </div>
+    </div>
+    <div class="vs">— VS —</div>
+    <div class="outcome-card milam">
+      <div class="outcome-card-label">Milam — End of Term</div>
+      <div class="outcome-row">
+        <div class="outcome-key">Return car</div>
+        <div class="outcome-val bright">Get cash back</div>
+      </div>
+      <div class="outcome-row">
+        <div class="outcome-key">Keep car</div>
+        <div class="outcome-val gold">Pay $6,000</div>
+      </div>
+      <div class="outcome-row">
+        <div class="outcome-key">Your options</div>
+        <div class="outcome-val gold">You decide</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- CALCULATOR -->
+<div id="calculator">
+  <div style="max-width:1000px;margin:0 auto;">
+    <p class="section-eyebrow" style="margin-bottom:10px">Equity-Lease Simulator</p>
+    <h2 class="section-headline" style="margin-bottom:32px">See Your <em>Numbers.</em></h2>
+
+    <div class="calc-grid">
+      <div>
+        <label class="calc-label">Loan Amount ($)</label>
+        <input class="calc-input" type="number" id="loanAmount" value="49631" oninput="update()">
+
+        <label class="calc-label">Interest Rate (%)</label>
+        <input class="calc-input" type="number" id="interestRate" value="7.14" step="0.01" oninput="update()">
+
+        <label class="calc-label">Subscription Term</label>
+        <div class="term-btns">
+          <button class="term-btn" id="btn3" onclick="setYear(3)">3 Years</button>
+          <button class="term-btn" id="btn4" onclick="setYear(4)">4 Years</button>
+          <button class="term-btn active" id="btn5" onclick="setYear(5)">5 Years</button>
+        </div>
+
+        <p class="calc-disclaimer">Results are indicative. Terms and conditions apply.</p>
+      </div>
+
+      <div class="calc-results">
+        <div class="result-card">
+          <div class="result-label">Your Weekly Payment</div>
+          <div class="result-val" id="weeklyPay">$0.00</div>
+          <div class="result-note">Fixed for your entire term</div>
+        </div>
+        <div class="result-card primary">
+          <div class="result-label">Your Estimated Payout</div>
+          <div class="result-val" id="cashbackVal">$0.00</div>
+          <div class="result-note">Received if you return the car</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">Cost to Keep the Car</div>
+          <div class="result-val" id="keepVal">$0.00</div>
+          <div class="result-note">Pay this to own it outright</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- DELETE DEPRECIATION -->
+<div class="section">
+  <p class="section-eyebrow">The Milam Advantage</p>
+  <h2 class="section-headline">Delete the <em>Depreciation.</em></h2>
+
+  <div class="feature-cards">
+    <div class="feature-card">
+      <div class="feature-num">01</div>
+      <div>
+        <div class="feature-title">Always Under Warranty</div>
+        <div class="feature-text">Your term ends before your warranty does. No mechanical anxiety. No surprise repair bills. Just a car that works.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">02</div>
+      <div>
+        <div class="feature-title">Fixed Weekly Payments</div>
+        <div class="feature-text">One number. Every week. For the entire term. No variable rates. No balloon shocks. No nasty surprises.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">03</div>
+      <div>
+        <div class="feature-title">You Choose at the End</div>
+        <div class="feature-text">Return it and get paid. Or pay $6,000 to keep it. Either way you win. No other finance product gives you that.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">MILAM</div>
+  <div class="footer-text">© 2025 Milam. Results are indicative. Terms apply.</div>
+</footer>
+
+<script>
+  let currentYear = 5;
+
+  function setYear(y) {
+    currentYear = y;
+    [3,4,5].forEach(i => {
+      document.getElementById('btn'+i).classList.toggle('active', i === y);
+    });
+    update();
+  }
+
+  function pmt(rate, nper, pv) {
+    if (rate === 0) return pv / nper;
+    return (pv * rate) / (1 - Math.pow(1 + rate, -nper));
+  }
+
+  function pvFunc(rate, nper, fv) {
+    if (rate === 0) return fv;
+    return fv / Math.pow(1 + rate, nper);
+  }
+
+  function update() {
+    const price = parseFloat(document.getElementById('loanAmount').value) || 0;
+    const annualRate = (parseFloat(document.getElementById('interestRate').value) || 0) / 100;
+    const weeklyRate = annualRate / 52;
+    const weeks = currentYear * 52;
+
+    const gfvPercent = currentYear === 5 ? 0.37 : (currentYear === 4 ? 0.42 : 0.47);
+    const gfvBalloon = price * gfvPercent;
+    const milamBalloon = price * 0.10;
+
+    const pvOfGFV = pvFunc(weeklyRate, weeks, gfvBalloon);
+    const balloonWeekly = pmt(weeklyRate, weeks, price - pvOfGFV);
+
+    const pvOfMilamBalloon = pvFunc(weeklyRate, weeks, milamBalloon);
+    const milamWeekly = pmt(weeklyRate, weeks, price - pvOfMilamBalloon);
+
+    const balloonTotal = balloonWeekly * weeks;
+    const milamTotal = milamWeekly * weeks;
+    const milamRefund = milamTotal - balloonTotal;
+
+    document.getElementById('weeklyPay').innerText = '$' + milamWeekly.toFixed(2);
+    document.getElementById('cashbackVal').innerText = '$' + milamRefund.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    document.getElementById('keepVal').innerText = '$' + milamBalloon.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  }
+
+  update();
+</script>
+
+</body>
+</html>
