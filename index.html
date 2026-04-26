@@ -1009,12 +1009,147 @@ footer {
     Launching soon. Join the early-access waitlist and be first to drive the future of car finance.
   </p>
   <style>
-    .gform-wrap { position: relative; width: 100%; max-width: 500px; margin: 0 auto; }
-    .gform-wrap iframe { width: 100%; height: 520px; border: none; background: transparent; filter: invert(1) hue-rotate(180deg); border-radius: 4px; }
+    .ml-form { max-width: 480px; margin: 0 auto; }
+    .ml-input {
+      width: 100%;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      color: #f0ece4;
+      padding: 16px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+    .ml-input:focus { border-color: #c8a96e; }
+    .ml-input::placeholder { color: #444; }
+    .ml-select {
+      width: 100%;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      color: #f0ece4;
+      padding: 16px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 20px;
+      cursor: pointer;
+      appearance: none;
+      transition: border-color 0.2s;
+    }
+    .ml-select:focus { border-color: #c8a96e; }
+    .ml-select option { background: #161616; color: #f0ece4; }
+    .ml-btn {
+      width: 100%;
+      background: #c8a96e;
+      color: #000;
+      border: none;
+      padding: 16px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .ml-btn:hover { background: #e8c97e; }
+    .ml-btn:disabled { background: #444; cursor: not-allowed; }
+    .ml-success {
+      display: none;
+      background: rgba(200,169,110,0.08);
+      border: 1px solid rgba(200,169,110,0.3);
+      padding: 20px;
+      color: #c8a96e;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-align: center;
+      margin-top: 12px;
+    }
+    .ml-error {
+      display: none;
+      color: #e05252;
+      font-size: 12px;
+      margin-top: 8px;
+      text-align: center;
+    }
+    .ml-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 8px;
+      display: block;
+      text-align: left;
+    }
   </style>
-  <div class="gform-wrap">
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeLhJegzzIklMkj8LFyBhOHxB0HNzPQPYvYdnfNenjJPi-XCg/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+  <div class="ml-form" id="mlForm">
+    <label class="ml-label">Your Email</label>
+    <input class="ml-input" type="email" id="mlEmail" placeholder="you@email.com">
+    <label class="ml-label">Which car are you considering?</label>
+    <select class="ml-select" id="mlCar">
+      <option value="" disabled selected>Select a range</option>
+      <option value="Under $40,000">Under $40,000</option>
+      <option value="$40,000 — $60,000">$40,000 — $60,000</option>
+      <option value="$60,000+">$60,000+</option>
+      <option value="Not sure yet">Not sure yet</option>
+    </select>
+    <button class="ml-btn" id="mlBtn" onclick="submitML()">Join Waitlist →</button>
+    <div class="ml-error" id="mlError">Please enter a valid email address.</div>
+    <div class="ml-success" id="mlSuccess">✓ You're on the list. We'll be in touch.</div>
   </div>
+
+  <script>
+    async function submitML() {
+      const email = document.getElementById('mlEmail').value.trim();
+      const car = document.getElementById('mlCar').value;
+      const btn = document.getElementById('mlBtn');
+      const error = document.getElementById('mlError');
+      const success = document.getElementById('mlSuccess');
+
+      error.style.display = 'none';
+
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        error.style.display = 'block';
+        error.textContent = 'Please enter a valid email address.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Joining...';
+
+      try {
+        const response = await fetch('https://connect.mailerlite.com/api/subscribers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMTEyNDA0MTI0ODBiYWUyODgxNTNkZDdiYzkxNjkzNDJjYjM1OTc5NDY0YmU3MWYzM2E2ZTgwYTZmYWE3ZWRhOTUwNjE0ZDAwM2NmZDUwZjkiLCJpYXQiOjE3NzcxODc0NTMuNjU2MTM5LCJuYmYiOjE3NzcxODc0NTMuNjU2MTQyLCJleHAiOjQ5MzI4NjEwNTMuNjQ5NjgyLCJzdWIiOiIxNDk4NDE3Iiwic2NvcGVzIjpbXX0.i3CjuedVZug88ecjmG9ol383QkF7pQVVs-vInJbMmZV_0MiIBw2vs22pIQT7V0r4mCcYozoIjd7g4QM_cRssXTj4ToeD8-Wi8lPvYDy0Y0PjQJspkw272sumd1JJJdr9RUGM2uog7ORkhzLLPhQE25eWtjTC-Kl7yVhaYt8p7Kr5wfFcOTKYFkGySBllkW3lU9EUG5kYchdBjITZKIRJMw7JsagZsmlQ3djd0tMz9KMW8xNIEhHzVE9NwW-s3foA19k5HbBzHPpB5LR-yU-a5bp5FwmgHGwNTjI-xtxalztUdgAvnvnP1EoQLvWowsNbFoWsm_tyOhDnlUgo-UeiHucCHnU9IlFTT2R2E2gyvtAOOEKCkykV9t3ZN_M8R5jbsXuYGm24andTmo6a6b95qRvpwroXkj--JBf2hbCgw-Fp5pY5aGl2SYR5U72laiWppz0jzaKoABca3sd0SUR-5FyjpW3ae_UKPt8ukn_YMa7RW4ggdZMGxC1OMw61h6tum99l4dUWkA0bGJ-mAvb3il6YF5ME73z6uDlDbcxRlGuYYG4EpLLbnzhSnwNGawi_gUxa8qtoylhD6Jtijl0LJLgQ_6QeZH-rO0wm_mjf3Fpm0niMWlsqgysWIALblMWUCfPBNpGK222fI-IqY-8tvQ_p13GJSHsYne4at_g9Ar0'
+          },
+          body: JSON.stringify({
+            email: email,
+            fields: {
+              car_consideration: car || 'Not specified'
+            }
+          })
+        });
+
+        if (response.ok || response.status === 200 || response.status === 201) {
+          document.getElementById('mlForm').style.opacity = '0.3';
+          document.getElementById('mlForm').style.pointerEvents = 'none';
+          success.style.display = 'block';
+        } else {
+          throw new Error('API error');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Join Waitlist →';
+        error.style.display = 'block';
+        error.textContent = 'Something went wrong. Please try again.';
+      }
+    }
+  </script>
   <p style="font-size:11px; color:#444; margin-top:16px;">No spam. No commitment. Just first access.</p>
 </div>
 
